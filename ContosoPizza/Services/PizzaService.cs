@@ -1,17 +1,22 @@
 using ContosoPizza.Models;
+using ContosoPizza.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace ContosoPizza.Services;
 
 public class PizzaService
 {
-    public PizzaService()
+    private PizzaContext _context;
+    public PizzaService(PizzaContext context)
     {
-        
+        _context = context;
     }
 
     public IEnumerable<Pizza> GetAll()
     {
-        throw new NotImplementedException();
+        _context.Pizzas
+        .AsNoTracking()
+        .ToList();
     }
 
     public Pizza? GetById(int id)
